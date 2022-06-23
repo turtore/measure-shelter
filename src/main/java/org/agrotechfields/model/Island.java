@@ -3,23 +3,17 @@ package org.agrotechfields.model;
 import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import io.quarkus.mongodb.panache.common.MongoEntity;
 
+import java.util.List;
+
 @MongoEntity(collection = "measureshelter")
 public class Island extends PanacheMongoEntity {
     public String name;
     public boolean active;
 
-//    public Integer temperature;
-//    public Integer airHumidity;
-//    public Integer soilMoisture;
+    public List<Measure> measures;
 
     public Island() {
 
     }
 
-//    public Island(String name, Integer temperature, Integer airHumidity, Integer soilMoisture) {
-//        this.name = name;
-//        this.temperature = temperature;
-//        this.airHumidity = airHumidity;
-//        this.soilMoisture = soilMoisture;
-//    }
 }
