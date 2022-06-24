@@ -6,9 +6,17 @@ import javax.ws.rs.ext.Provider;
 
 @Provider
 public class GeneralException implements ExceptionMapper<Exception> {
-    @Override
-    public Response toResponse(Exception exception) {
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                .entity("Internal Error").build();
+
+  @Override
+  public Response toResponse(Exception exception) {
+
+    if (exception instanceof NameNotFoundException) {
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity(exception.getMessage()).build();
     }
+
+
+    return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+            .entity("Internal Error").build();
+  }
 }

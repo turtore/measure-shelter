@@ -1,5 +1,6 @@
 package org.agrotechfields.service;
 
+import org.agrotechfields.exception.NameNotFoundException;
 import org.agrotechfields.model.Island;
 import org.agrotechfields.model.Measure;
 import org.agrotechfields.repository.IslandRepository;
@@ -48,7 +49,7 @@ public class IslandService {
     if (islandRepository.existsByName(name)) {
       islandRepository.delete(islandRepository.findByName(name));
     } else {
-      throw new BadRequestException("Name dont exists");
+      throw new NameNotFoundException("No island found with the Name provided");
     }
   }
 
