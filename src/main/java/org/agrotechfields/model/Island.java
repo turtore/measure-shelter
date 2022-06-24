@@ -31,4 +31,12 @@ public class Island extends PanacheMongoEntity {
   public void setActive() {
     this.active = true;
   }
+
+  public boolean isActive() {
+    return this.active;
+  }
+
+  public String getName() {
+    return this.name;
+  }
 }

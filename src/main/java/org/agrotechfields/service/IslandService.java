@@ -1,6 +1,7 @@
 package org.agrotechfields.service;
 
 import org.agrotechfields.exception.EmptyNameException;
+import org.agrotechfields.exception.InactiveIslandException;
 import org.agrotechfields.exception.NameNotFoundException;
 import org.agrotechfields.model.Island;
 import org.agrotechfields.model.Measure;
@@ -37,16 +38,25 @@ public class IslandService {
 
 
   public void addReport(String name, Measure measureData) {
-    Island island = islandRepository.findByName(name);
-    Measure measure = new Measure(measureData);
-    island.addMeasure(measure);
-    islandRepository.update(island);
+    if (islandRepository.existsByName(name)) {
+      Island island = islandRepository.findByName(name);
+      if (island.isActive()){
+        Measure measure = new Measure(measureData);
+        island.addMeasure(measure);
+        islandRepository.update(island);
+      } else {
+        throw new InactiveIslandException("Island " + island.getName() + " status is Inactive!");
+      }
+    } else {
+      throw new NameNotFoundException("Island Not Found");
+    }
   }
 
 
   public Object findByName(String name) {
     return islandRepository.findByName(name);
   }
+
 
   public void removeIslandByName(String name) {
     if (islandRepository.existsByName(name)) {
@@ -55,6 +65,7 @@ public class IslandService {
       throw new NameNotFoundException("No island found with the Name provided");
     }
   }
+
 
   public void removeIslandById(ObjectId id) {
     islandRepository.deleteById(id);
