@@ -45,8 +45,9 @@ public class IslandResource {
 
   @DELETE
   @Consumes(MediaType.APPLICATION_JSON)
-  public void deleteIslandByName(@QueryParam("name") String name) {
-    islandService.removeIsland(name);
+  public Response deleteIslandByName(@QueryParam("name") String name) {
+    islandService.removeIslandByName(name);
+    return Response.ok().build();
   }
 
   @DELETE

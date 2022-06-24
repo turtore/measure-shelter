@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.BadRequestException;
 import java.util.List;
 
 @ApplicationScoped
@@ -43,8 +44,12 @@ public class IslandService {
     return islandRepository.findByName(name);
   }
 
-  public void removeIsland(String name) {
-    islandRepository.delete(islandRepository.findByName(name));
+  public void removeIslandByName(String name) {
+    if (islandRepository.existsByName(name)) {
+      islandRepository.delete(islandRepository.findByName(name));
+    } else {
+      throw new BadRequestException("Name dont exists");
+    }
   }
 
   public void removeIslandById(ObjectId id) {
