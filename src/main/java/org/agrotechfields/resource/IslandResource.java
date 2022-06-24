@@ -2,8 +2,8 @@ package org.agrotechfields.resource;
 
 import org.agrotechfields.model.Island;
 import org.agrotechfields.model.Measure;
-import org.agrotechfields.repository.IslandRepository;
 import org.agrotechfields.service.IslandService;
+import org.bson.types.ObjectId;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -40,7 +40,18 @@ public class IslandResource {
   @Consumes(MediaType.APPLICATION_JSON)
   public void addReport(@QueryParam("name") String name, Measure measure) {
     islandService.addReport(name, measure);
+  }
 
+  @DELETE
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void deleteIslandByName(@QueryParam("name") String name) {
+    islandService.removeIsland(name);
+  }
+
+  @DELETE
+  @Consumes(MediaType.APPLICATION_JSON)
+  public void deleteIslandById(@QueryParam("id") ObjectId id) {
+    islandService.removeIslandById(id);
   }
 
 }
