@@ -18,6 +18,14 @@ public class GeneralException implements ExceptionMapper<Exception> {
       return Response.status(Response.Status.BAD_REQUEST)
               .entity(exception.getMessage()).build();
     }
+    if (exception instanceof InactiveIslandException) {
+      return Response.status(Response.Status.BAD_REQUEST)
+              .entity(exception.getMessage()).build();
+    }
+    if (exception instanceof IdNotFoundException) {
+      return Response.status(Response.Status.NOT_FOUND)
+              .entity(exception.getMessage()).build();
+    }
 
 
     return Response.status(Response.Status.INTERNAL_SERVER_ERROR)

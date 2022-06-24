@@ -1,6 +1,7 @@
 package org.agrotechfields.service;
 
 import org.agrotechfields.exception.EmptyNameException;
+import org.agrotechfields.exception.IdNotFoundException;
 import org.agrotechfields.exception.InactiveIslandException;
 import org.agrotechfields.exception.NameNotFoundException;
 import org.agrotechfields.model.Island;
@@ -68,7 +69,11 @@ public class IslandService {
 
 
   public void removeIslandById(ObjectId id) {
-    islandRepository.deleteById(id);
+    if (islandRepository.existsById(id)) {
+      islandRepository.deleteById(id);
+    } else {
+      throw new IdNotFoundException("Island with Id="+ id +"not found");
+    }
   }
 
   public void turnActive(String name) {
