@@ -17,7 +17,7 @@ class IslandResourceTest {
   @DisplayName("1 - Endpoint should register a new Island")
   public void testCreateIslandEndpoint() {
     Island testIsland = new Island();
-    testIsland.setName("Test Island");
+    testIsland.setName("TestIsland");
 
     given().contentType("application/json").body(testIsland).when().post("/islands/add").then().statusCode(201);
   }
@@ -44,8 +44,15 @@ class IslandResourceTest {
     @DisplayName("4 - Should return notFound(404) if asked to delete a island that doesn't exists")
     public void testNotFoundDeleteEndpoint() {
 
-
-      given().when().delete("/islands?name=dontexists").then().statusCode(404);
+      given().when().delete("/islands/name?name=dontexists").then().statusCode(404);
     }
+
+  @Test
+  @Order(5)
+  @DisplayName("5 - Endpoint should delete a registered Island")
+  public void testDeleteIslandEndpoint() {
+
+    given().when().delete("/islands/name?name=TestIsland").then().statusCode(200);
+  }
 
 }
