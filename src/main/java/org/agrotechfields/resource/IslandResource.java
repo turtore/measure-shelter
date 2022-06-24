@@ -64,6 +64,7 @@ public class IslandResource {
   }
 
   @DELETE
+  @Path("/name")
   @Consumes(MediaType.APPLICATION_JSON)
   public Response deleteIslandByName(@QueryParam("name") String name) {
     islandService.removeIslandByName(name);
@@ -71,6 +72,7 @@ public class IslandResource {
   }
 
   @DELETE
+  @Path("/id")
   @Consumes(MediaType.APPLICATION_JSON)
   public void deleteIslandById(@QueryParam("id") ObjectId id) {
     islandService.removeIslandById(id);

@@ -15,7 +15,5 @@ public class IslandRepository implements PanacheMongoRepository<Island> {
   public boolean existsByName(String name) {
     return find("name", name).count() > 0;
   }
-  public boolean existsById(ObjectId id) {
-    return find("id", id).count() > 0;
-  }
+
 }

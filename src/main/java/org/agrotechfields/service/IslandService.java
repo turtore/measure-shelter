@@ -63,16 +63,16 @@ public class IslandService {
     if (islandRepository.existsByName(name)) {
       islandRepository.delete(islandRepository.findByName(name));
     } else {
-      throw new NameNotFoundException("No island found with the Name provided");
+      throw new NameNotFoundException("No island found with the Name= " + name);
     }
   }
 
 
   public void removeIslandById(ObjectId id) {
-    if (islandRepository.existsById(id)) {
+    if (islandRepository.findById(id) != null) {
       islandRepository.deleteById(id);
     } else {
-      throw new IdNotFoundException("Island with Id="+ id +"not found");
+      throw new IdNotFoundException("Island with Id= "+ id +" not found");
     }
   }
 
