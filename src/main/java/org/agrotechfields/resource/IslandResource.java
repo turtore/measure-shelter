@@ -1,5 +1,6 @@
 package org.agrotechfields.resource;
 
+import org.agrotechfields.exception.EmptyNameException;
 import org.agrotechfields.model.Island;
 import org.agrotechfields.model.Measure;
 import org.agrotechfields.service.IslandService;
@@ -23,7 +24,12 @@ public class IslandResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/add")
   public Response addIsland(Island island) {
-    return Response.created(URI.create("Created")).build();
+    try {
+      islandService.addIsland(island);
+      return Response.created(URI.create("Created")).build();
+    } catch (EmptyNameException e) {
+      return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+    }
   }
 
   @GET

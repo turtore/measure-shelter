@@ -1,5 +1,6 @@
 package org.agrotechfields.service;
 
+import org.agrotechfields.exception.EmptyNameException;
 import org.agrotechfields.exception.NameNotFoundException;
 import org.agrotechfields.model.Island;
 import org.agrotechfields.model.Measure;
@@ -26,7 +27,9 @@ public class IslandService {
 
 
   public void addIsland(Island island) {
-    if (island.name != null) {
+    if (island.name.trim().equals("") || island.name == null) {
+      throw new EmptyNameException("Name cannot be blank");
+    } else {
       island.setActive();
       islandRepository.persist(island);
     }
