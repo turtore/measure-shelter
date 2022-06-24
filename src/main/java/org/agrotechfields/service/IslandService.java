@@ -70,4 +70,24 @@ public class IslandService {
   public void removeIslandById(ObjectId id) {
     islandRepository.deleteById(id);
   }
+
+  public void turnActive(String name) {
+    if(islandRepository.existsByName(name)) {
+      Island island = islandRepository.findByName(name);
+      island.setActive();
+      island.update(island);
+    } else {
+      throw new NameNotFoundException("No island found");
+    }
+  }
+
+  public void turnInactive(String name) {
+    if(islandRepository.existsByName(name)) {
+      Island island = islandRepository.findByName(name);
+      island.setInactive();
+      island.update(island);
+    } else {
+      throw new NameNotFoundException("No island found");
+    }
+  }
 }

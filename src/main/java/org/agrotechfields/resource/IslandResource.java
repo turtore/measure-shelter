@@ -49,6 +49,20 @@ public class IslandResource {
     islandService.addReport(name, measure);
   }
 
+  @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Path("/on")
+  public void SwitchOn(@QueryParam("name") String name) {
+    islandService.turnActive(name);
+  }
+
+  @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Path("/off")
+  public void SwitchOff(@QueryParam("name") String name) {
+    islandService.turnInactive(name);
+  }
+
   @DELETE
   @Consumes(MediaType.APPLICATION_JSON)
   public Response deleteIslandByName(@QueryParam("name") String name) {
