@@ -17,15 +17,18 @@ public class Island extends PanacheMongoEntity {
     this.measures = new ArrayList<>();
   }
 
-  public void addMeasure(Measure measure){
+  public void addMeasure(Measure measure) {
     if ((this.measures).equals(null)) {
       this.measures = new ArrayList<>();
     }
     measures.add(measure);
   }
 
+  public void setName(String name) {
+    this.name = name;
+  }
 
-
-
-
+  public void setActive() {
+    this.active = true;
+  }
 }

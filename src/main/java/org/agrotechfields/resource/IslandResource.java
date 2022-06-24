@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 
 @ApplicationScoped
 @Path("/islands")
@@ -21,8 +22,8 @@ public class IslandResource {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/add")
-  public void addIsland(Island island) {
-    islandService.addIsland(island);
+  public Response addIsland(Island island) {
+    return Response.created(URI.create("Created")).build();
   }
 
   @GET
