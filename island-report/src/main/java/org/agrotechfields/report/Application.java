@@ -1,4 +1,4 @@
-package org.agrotechfields;
+package org.agrotechfields.report;
 
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.annotations.QuarkusMain;

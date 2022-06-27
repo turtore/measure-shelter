@@ -1,13 +1,12 @@
 package org.agrotechfields.resource;
 
-import io.quarkus.test.junit.QuarkusTest;
-import org.agrotechfields.model.Island;
+import org.agrotechfields.report.model.Island;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
+import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
 class IslandResourceTest {

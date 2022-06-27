@@ -1,4 +1,4 @@
-package org.agrotechfields;
+package org.agrotechfields.report;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

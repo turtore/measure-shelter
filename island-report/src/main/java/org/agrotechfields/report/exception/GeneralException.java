@@ -1,4 +1,4 @@
-package org.agrotechfields.exception;
+package org.agrotechfields.report.exception;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

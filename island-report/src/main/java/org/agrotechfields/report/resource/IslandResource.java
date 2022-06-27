@@ -1,11 +1,11 @@
-package org.agrotechfields.resource;
+package org.agrotechfields.report.resource;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import org.agrotechfields.exception.EmptyNameException;
-import org.agrotechfields.model.Island;
-import org.agrotechfields.model.Measure;
-import org.agrotechfields.service.IslandService;
+import org.agrotechfields.report.exception.EmptyNameException;
+import org.agrotechfields.report.model.Island;
+import org.agrotechfields.report.model.Measure;
+import org.agrotechfields.report.service.IslandService;
 import org.bson.types.ObjectId;
 
 import javax.enterprise.context.ApplicationScoped;

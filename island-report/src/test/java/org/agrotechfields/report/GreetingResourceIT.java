@@ -1,4 +1,4 @@
-package org.agrotechfields;
+package org.agrotechfields.report;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 

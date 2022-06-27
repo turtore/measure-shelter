@@ -1,8 +1,7 @@
-package org.agrotechfields.repository;
+package org.agrotechfields.report.repository;
 
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
-import org.agrotechfields.model.Island;
-import org.bson.types.ObjectId;
+import org.agrotechfields.report.model.Island;
 
 import javax.enterprise.context.ApplicationScoped;
 

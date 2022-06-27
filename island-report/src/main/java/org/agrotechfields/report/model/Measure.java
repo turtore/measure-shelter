@@ -1,4 +1,4 @@
-package org.agrotechfields.model;
+package org.agrotechfields.report.model;
 
 import java.time.LocalDateTime;
 
