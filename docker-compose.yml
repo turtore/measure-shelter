@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  mongodb_container:
+  mongo:
     container_name: mongo
     image: mongo
     ports:
@@ -17,7 +17,7 @@ services:
         source: ./jwt
         target: /jwt
     links:
-      - mongodb_container
+      - mongo
   techfields-jwt:
     container_name: techfields-jwt
     image: measureshelter/jwt:1.0.0-SNAPSHOT
@@ -29,5 +29,3 @@ services:
       - type: bind
         source: ./jwt
         target: /jwt
-    links:
-      - island-report
