@@ -1,10 +1,13 @@
-version: '3.8'
+version: '3.7'
 services:
   mongo:
     container_name: mongo
     image: mongo
+    restart: always
     ports:
       - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
   island-report:
     container_name: island-report
     image: measureshelter/islandreport:1.0.0-SNAPSHOT
@@ -29,3 +32,5 @@ services:
       - type: bind
         source: ./jwt
         target: /jwt
+volumes:
+  mongodb_data_container:

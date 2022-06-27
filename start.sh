@@ -1,3 +1,4 @@
+./clearallcontainers.sh
 ./generate_jwtKeys.sh
 cd island-report
 mvn clean compile package
