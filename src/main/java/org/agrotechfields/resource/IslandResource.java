@@ -1,5 +1,7 @@
 package org.agrotechfields.resource;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import org.agrotechfields.exception.EmptyNameException;
 import org.agrotechfields.model.Island;
 import org.agrotechfields.model.Measure;
@@ -21,6 +23,7 @@ public class IslandResource {
   public IslandService islandService;
 
   @POST
+  @RolesAllowed({"admin, drone"})
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/add")
   public Response addIsland(Island island) {
@@ -33,23 +36,27 @@ public class IslandResource {
   }
 
   @GET
+  @PermitAll
   public Response getAll() {
     return Response.ok(islandService.getAll()).build();
   }
 
   @GET
+  @PermitAll
   @Path("/filter")
   public Response getByName(@QueryParam("name") String name) {
     return Response.ok(islandService.findByName(name)).build();
   }
 
   @PUT
+  @RolesAllowed({"admin, drone"})
   @Consumes(MediaType.APPLICATION_JSON)
   public void addReport(@QueryParam("name") String name, Measure measure) {
     islandService.addReport(name, measure);
   }
 
   @PUT
+  @RolesAllowed({"admin, drone"})
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/on")
   public void SwitchOn(@QueryParam("name") String name) {
@@ -57,6 +64,7 @@ public class IslandResource {
   }
 
   @PUT
+  @RolesAllowed({"admin, drone"})
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/off")
   public void SwitchOff(@QueryParam("name") String name) {
@@ -64,6 +72,7 @@ public class IslandResource {
   }
 
   @DELETE
+  @RolesAllowed({"admin, drone"})
   @Path("/name")
   @Consumes(MediaType.APPLICATION_JSON)
   public Response deleteIslandByName(@QueryParam("name") String name) {
@@ -72,6 +81,7 @@ public class IslandResource {
   }
 
   @DELETE
+  @RolesAllowed({"admin, drone"})
   @Path("/id")
   @Consumes(MediaType.APPLICATION_JSON)
   public void deleteIslandById(@QueryParam("id") ObjectId id) {
