@@ -27,7 +27,8 @@ Como a arquitetura apresentada é inicial, sua equipe tem a liberdade para event
 ### Funcionalidades:
 - Implementar um C.R.U.D. para as ilhas;
 - Implementar um C.R.U.D. para as medidas realizadas pelas ilhas;
-- Alterar o status da ilha; Extra:
+- Alterar o status da ilha; 
+### Extra:
 - Implementar três endpoints referentes às imagens recebidas pelo Satélite:
 - Inserir uma imagem
 - Listar todos as imagens
