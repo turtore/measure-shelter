@@ -14,12 +14,12 @@ class IslandResourceTest {
 
   @Test
   @Order(1)
-  @DisplayName("1 - Endpoint should register a new Island")
+  @DisplayName("1 - Endpoint should deny unauthorized user to register a new Island")
   public void testCreateIslandEndpoint() {
     Island testIsland = new Island();
     testIsland.setName("TestIsland");
 
-    given().contentType("application/json").body(testIsland).when().post("/islands/add").then().statusCode(201);
+    given().contentType("application/json").body(testIsland).when().post("/islands/add").then().statusCode(401);
   }
 
   @Test
@@ -49,10 +49,10 @@ class IslandResourceTest {
 
   @Test
   @Order(5)
-  @DisplayName("5 - Endpoint should delete a registered Island")
+  @DisplayName("5 - Endpoint should deny unauthorized user to  delete a registered Island")
   public void testDeleteIslandEndpoint() {
 
-    given().when().delete("/islands/name?name=TestIsland").then().statusCode(200);
+    given().when().delete("/islands/name?name=TestIsland").then().statusCode(401);
   }
 
 }
