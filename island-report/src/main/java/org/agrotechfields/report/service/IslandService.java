@@ -19,8 +19,6 @@ public class IslandService {
   @Inject
   IslandRepository islandRepository;
 
-
-
   public List<Island> getAll() {
     return islandRepository.listAll();
   }
@@ -74,6 +72,7 @@ public class IslandService {
     }
   }
 
+
   public void turnActive(String name) {
     if(islandRepository.existsByName(name)) {
       Island island = islandRepository.findByName(name);
@@ -83,6 +82,7 @@ public class IslandService {
       throw new NameNotFoundException("No island found");
     }
   }
+
 
   public void turnInactive(String name) {
     if(islandRepository.existsByName(name)) {
