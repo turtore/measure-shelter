@@ -1,30 +1,24 @@
-package org.agrotechfields.report.model;
-
-import io.quarkus.mongodb.panache.PanacheMongoEntity;
-import io.quarkus.mongodb.panache.common.MongoEntity;
+package org.agrotechfields.report.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.bson.codecs.pojo.annotations.BsonId;
-import org.bson.types.ObjectId;
+import org.agrotechfields.report.model.Measure;
 
-@MongoEntity(collection = "measureshelter")
-public class Island extends PanacheMongoEntity {
+public class IslandDto {
 
-  @BsonId
-  private ObjectId id;
+  public String id;
 
-  private String name;
-  private boolean active;
+  public String name;
+  public boolean active;
 
-  private List<Measure> measures;
+  public List<Measure> measures;
 
-  public Island() {
+  public IslandDto() {
     this.measures = new ArrayList<>();
   }
 
   public void addMeasure(Measure measure) {
-    if (this.measures != null) {
+    if ((this.measures).equals(null)) {
       this.measures = new ArrayList<>();
     }
     measures.add(measure);
@@ -49,11 +43,11 @@ public class Island extends PanacheMongoEntity {
     return this.name;
   }
 
-  public ObjectId getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(ObjectId id) {
+  public void setId(String id) {
     this.id = id;
   }
 

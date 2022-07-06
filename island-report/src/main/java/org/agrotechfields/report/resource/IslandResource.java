@@ -2,6 +2,7 @@ package org.agrotechfields.report.resource;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
+import org.agrotechfields.report.dto.IslandDto;
 import org.agrotechfields.report.exception.EmptyNameException;
 import org.agrotechfields.report.model.Island;
 import org.agrotechfields.report.model.Measure;
@@ -34,7 +35,6 @@ public class IslandResource {
   @RolesAllowed("admin")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/add")
   public Response addIsland(Island island) {
     try {
       islandService.addIsland(island);
@@ -54,54 +54,55 @@ public class IslandResource {
   @GET
   @PermitAll
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/filter")
-  public Response getByName(@QueryParam("name") String name) {
-    return Response.ok(islandService.findByName(name)).build();
+  @Path("/{id}")
+  public Response getByName(@PathParam("id") String id) {
+    return Response.ok(islandService.findById(new ObjectId(id))).build();
+  }
+
+  @PATCH
+  @RolesAllowed("admin")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/{id}/measure")
+  public void addReport(@PathParam("id") String id, Measure measure) {
+    islandService.addReport(new ObjectId(id), measure);
   }
 
   @PUT
   @RolesAllowed("admin")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public void addReport(@QueryParam("name") String name, Measure measure) {
-    islandService.addReport(name, measure);
+  @Path("/{id}")
+  public Response editIsland(@PathParam("id") String id, IslandDto islandDto) {
+    return Response.ok(islandService.editIsland(id, islandDto)).build();
   }
 
-  @PUT
+  @PATCH
   @RolesAllowed("admin")
-  @Path("/on")
+  @Path("/{ìd}/on")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public void SwitchOn(@QueryParam("name") String name) {
-    islandService.turnActive(name);
+  public void SwitchOn(@PathParam("id") String id) {
+    islandService.turnActive(new ObjectId(id));
   }
 
-  @PUT
+  @PATCH
   @RolesAllowed("admin")
-  @Path("/off")
+  @Path("/{id}/off")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public void SwitchOff(@QueryParam("name") String name) {
-    islandService.turnInactive(name);
+  public void SwitchOff(@PathParam("id") String id) {
+    islandService.turnInactive(new ObjectId(id));
   }
 
   @DELETE
   @RolesAllowed("admin")
-  @Path("/name")
+  @Path("/{id}")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response deleteIslandByName(@QueryParam("name") String name) {
-    islandService.removeIslandByName(name);
-    return Response.ok().build();
-  }
-
-  @DELETE
-  @RolesAllowed("admin")
-  @Path("/id")
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
-  public void deleteIslandById(@QueryParam("id") ObjectId id) {
-    islandService.removeIslandById(id);
+  public Response deleteById(@PathParam("id") String id) {
+    islandService.removeIslandById(new ObjectId(id));
+    return Response.noContent().build();
   }
 
 }

@@ -1,5 +1,8 @@
 package org.agrotechfields.report.service;
 
+import io.quarkus.runtime.util.StringUtil;
+import java.util.Optional;
+import org.agrotechfields.report.dto.IslandDto;
 import org.agrotechfields.report.exception.EmptyNameException;
 import org.agrotechfields.report.exception.IdNotFoundException;
 import org.agrotechfields.report.exception.InactiveIslandException;
@@ -25,8 +28,8 @@ public class IslandService {
 
 
   public void addIsland(Island island) {
-    if (island.name.trim().equals("") || island.name == null) {
-      throw new EmptyNameException("Name cannot be blank");
+    if (island.getName() == null || island.getName().trim().equals("")) {
+      throw new EmptyNameException();
     } else {
       island.setActive();
       islandRepository.persist(island);
@@ -34,63 +37,67 @@ public class IslandService {
   }
 
 
-  public void addReport(String name, Measure measureData) {
-    if (islandRepository.existsByName(name)) {
-      Island island = islandRepository.findByName(name);
+  public void addReport(ObjectId id, Measure measureData) {
+    if (islandRepository.existsById(id)) {
+      Island island = islandRepository.findById(id);
       if (island.isActive()){
         Measure measure = new Measure(measureData);
         island.addMeasure(measure);
         islandRepository.update(island);
       } else {
-        throw new InactiveIslandException("Island " + island.getName() + " status is Inactive!");
+        throw new InactiveIslandException();
       }
     } else {
-      throw new NameNotFoundException("Island Not Found");
+      throw new NameNotFoundException();
     }
   }
 
-
-  public Object findByName(String name) {
-    return islandRepository.findByName(name);
-  }
-
-
-  public void removeIslandByName(String name) {
-    if (islandRepository.existsByName(name)) {
-      islandRepository.delete(islandRepository.findByName(name));
-    } else {
-      throw new NameNotFoundException("No island found with the Name= " + name);
-    }
-  }
 
 
   public void removeIslandById(ObjectId id) {
     if (islandRepository.findById(id) != null) {
       islandRepository.deleteById(id);
     } else {
-      throw new IdNotFoundException("Island with Id= "+ id +" not found");
+      throw new IdNotFoundException();
     }
   }
 
 
-  public void turnActive(String name) {
-    if(islandRepository.existsByName(name)) {
-      Island island = islandRepository.findByName(name);
+  public void turnActive(ObjectId id) {
+    if(islandRepository.existsById(id)) {
+      Island island = islandRepository.findById(id);
       island.setActive();
       island.update(island);
     } else {
-      throw new NameNotFoundException("No island found");
+      throw new NameNotFoundException();
     }
   }
 
 
-  public void turnInactive(String name) {
-    if(islandRepository.existsByName(name)) {
-      Island island = islandRepository.findByName(name);
+  public void turnInactive(ObjectId id) {
+    if(islandRepository.existsById(id)) {
+      Island island = islandRepository.findById(id);
       island.setInactive();
       island.update(island);
     } else {
-      throw new NameNotFoundException("No island found");
+      throw new NameNotFoundException();
     }
+  }
+
+  public Island editIsland(String id, IslandDto islandDto) {
+    Island island = new Island();
+    island.setName(islandDto.getName());
+    island.setMeasures(islandDto.getMeasures());
+    island.setId(new ObjectId(id));
+
+    islandRepository.update(island);
+
+    return island;
+  }
+
+  public Island findById(ObjectId objectId) {
+    return Optional.ofNullable(islandRepository
+        .findById(objectId))
+        .orElseThrow(() -> new  IdNotFoundException());
   }
 }

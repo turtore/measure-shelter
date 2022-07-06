@@ -4,15 +4,12 @@ import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import org.agrotechfields.report.model.Island;
 
 import javax.enterprise.context.ApplicationScoped;
+import org.bson.types.ObjectId;
 
 @ApplicationScoped
 public class IslandRepository implements PanacheMongoRepository<Island> {
 
-  public Island findByName(String name) {
-    return find("name", name).firstResult();
+  public boolean existsById(ObjectId id) {
+    return find("id", id).count() > 0;
   }
-  public boolean existsByName(String name) {
-    return find("name", name).count() > 0;
-  }
-
 }
