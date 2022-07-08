@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 public class Measure {
   public LocalDateTime moment;
-
   public Integer temperature;
   public Integer airHumidity;
   public Integer soilMoisture;

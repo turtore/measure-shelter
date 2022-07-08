@@ -5,28 +5,22 @@ import io.quarkus.mongodb.panache.common.MongoEntity;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.bson.codecs.pojo.annotations.BsonId;
-import org.bson.types.ObjectId;
 
 @MongoEntity(collection = "measureshelter")
 public class Island extends PanacheMongoEntity {
 
-  @BsonId
-  private ObjectId id;
 
   private String name;
   private boolean active;
 
-  private List<Measure> measures;
+  public List<Measure> measures;
+
 
   public Island() {
     this.measures = new ArrayList<>();
   }
 
   public void addMeasure(Measure measure) {
-    if (this.measures != null) {
-      this.measures = new ArrayList<>();
-    }
     measures.add(measure);
   }
 
@@ -47,14 +41,6 @@ public class Island extends PanacheMongoEntity {
 
   public String getName() {
     return this.name;
-  }
-
-  public ObjectId getId() {
-    return id;
-  }
-
-  public void setId(ObjectId id) {
-    this.id = id;
   }
 
   public void setActive(boolean active) {

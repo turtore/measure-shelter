@@ -55,8 +55,8 @@ public class IslandResource {
   @PermitAll
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/{id}")
-  public Response getByName(@PathParam("id") String id) {
-    return Response.ok(islandService.findById(new ObjectId(id))).build();
+  public Response getById(@PathParam("id") String id) {
+    return Response.ok(islandService.findById(id)).build();
   }
 
   @PATCH
@@ -65,7 +65,7 @@ public class IslandResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/{id}/measure")
   public void addReport(@PathParam("id") String id, Measure measure) {
-    islandService.addReport(new ObjectId(id), measure);
+    islandService.addReport(id, measure);
   }
 
   @PUT
@@ -83,7 +83,7 @@ public class IslandResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public void SwitchOn(@PathParam("id") String id) {
-    islandService.turnActive(new ObjectId(id));
+    islandService.turnActive(id);
   }
 
   @PATCH
@@ -92,7 +92,7 @@ public class IslandResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public void SwitchOff(@PathParam("id") String id) {
-    islandService.turnInactive(new ObjectId(id));
+    islandService.turnInactive(id);
   }
 
   @DELETE
@@ -101,7 +101,7 @@ public class IslandResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response deleteById(@PathParam("id") String id) {
-    islandService.removeIslandById(new ObjectId(id));
+    islandService.removeIslandById(id);
     return Response.noContent().build();
   }
 

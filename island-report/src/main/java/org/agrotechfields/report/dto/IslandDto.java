@@ -3,10 +3,11 @@ package org.agrotechfields.report.dto;
 import java.util.ArrayList;
 import java.util.List;
 import org.agrotechfields.report.model.Measure;
+import org.bson.types.ObjectId;
 
 public class IslandDto {
 
-  public String id;
+  public ObjectId id;
 
   public String name;
   public boolean active;
@@ -43,12 +44,12 @@ public class IslandDto {
     return this.name;
   }
 
-  public String getId() {
+  public ObjectId getId() {
     return id;
   }
 
   public void setId(String id) {
-    this.id = id;
+    this.id = new ObjectId(id);
   }
 
   public void setActive(boolean active) {
